@@ -49,11 +49,21 @@ void process_data(FILE *input_file) {
     list_print(head);
     //system call stuff
 
-    /*struct timeval userinfo;
+    struct rusage usage;
+    struct timeval userinfo;
     struct timeval systeminfo;
-    int user = getrusage(RUSAGE_SELF, ru_utime);
-    int system = getrusage(RUSAGE_SELF, ru_stime);
-    */
+    int u = getrusage(RUSAGE_SELF, &usage);
+    userinfo = usage.ru_utime;
+    systeminfo = usage.ru_stime;
+    
+    if(u == 0) { //print out
+        printf("User time: %ld.%ld\n", userinfo.tv_sec, userinfo.tv_usec);
+        printf("System time: %ld.%ld\n", systeminfo.tv_sec, systeminfo.tv_usec);
+    }
+    else {
+        fprintf(stderr,"ERROR ALERT OH NOES!!");
+    }
+    
 
     list_clear(head); //free everything in the list at the end
 }
