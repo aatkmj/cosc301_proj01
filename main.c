@@ -25,7 +25,6 @@ void process_data(FILE *input_file) {
     struct node *head = malloc(sizeof(struct node));
     head = NULL;
     char raw_data[1024];
-    printf("this is fgets: %s\n", raw_data);
     
     //while(strcmp(raw_data,"\n") != 0) {
     while(fgets(raw_data, 1024, input_file) != NULL){
@@ -34,6 +33,9 @@ void process_data(FILE *input_file) {
         char **str = tokenify(raw_data);
         //convert values returned into an int
         int i = 0;
+        if(str[i] == NULL) { 
+            free(str);
+        }
         while(str[i] != NULL) {
             int value = strtol(str[i], NULL, 10); // atoi(*str);
             //add value to linked list
@@ -64,7 +66,7 @@ void process_data(FILE *input_file) {
         fprintf(stderr,"ERROR ALERT OH NOES!!");
     }
     
-
+    
     list_clear(head); //free everything in the list at the end
 }
 
