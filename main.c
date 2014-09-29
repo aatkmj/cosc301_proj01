@@ -109,12 +109,14 @@ char** tokenify(char *s) { //was const char *s --> made it char *s)
 	char **token_list = malloc (num_tok *sizeof (char *)); //create pointer array for tokens
 	char *token = strtok (temp2, " \t\n");	//get tokens and use for loop to place them in token array
 	int i = 0;
-	for (; token != NULL; i ++) {
+	//for (; token != NULL; i ++) {
+        while(token != NULL) {
 		char *tok = NULL;
                 //call is_valid, if == true, want to add to tok_list
                 if(is_valid(token)) {
 			tok = strdup (token);
                         token_list [i] = tok;
+                        i++; //added this instead of for
 		}
 		token = strtok (NULL, " \t\n");	//get new token
 		
