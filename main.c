@@ -34,7 +34,7 @@ void process_data(FILE *input_file) {
         //convert values returned into an int
         int i = 0;
         if(str[i] == NULL) { 
-            free(str);
+            free(str); //
         }
         while(str[i] != NULL) {
             int value = strtol(str[i], NULL, 10); // atoi(*str);
@@ -42,13 +42,14 @@ void process_data(FILE *input_file) {
             list_insert(value, &head); 
             //update counter
             i++;
+            
     
         }
         //get next line from fgets
         //fgets(raw_data, 1024, input_file);
 
         //free the tokens
-        free(str);
+        free(str); //says this is invalid?
     }
     list_print(head);
     //system call stuff
@@ -70,6 +71,7 @@ void process_data(FILE *input_file) {
     
     
     list_clear(head); //free everything in the list at the end
+    
 }
 
 int is_valid(char *tok) {
@@ -117,7 +119,9 @@ char** tokenify(char *s) { //was const char *s --> made it char *s)
 			tok = strdup (token);
                         token_list [i] = tok;
                         i++; //added this instead of for
+                        free(tok);
 		}
+                
 		token = strtok (NULL, " \t\n");	//get new token
 		
 	}
