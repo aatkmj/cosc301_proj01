@@ -42,11 +42,13 @@ void process_data(FILE *input_file) {
             list_insert(value, &head); 
             //update counter
             i++;
-            //free the tokens
-            free(str); 
+    
         }
         //get next line from fgets
         //fgets(raw_data, 1024, input_file);
+
+        //free the tokens
+        free(str);
     }
     list_print(head);
     //system call stuff
